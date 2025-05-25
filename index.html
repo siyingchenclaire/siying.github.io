@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siying Chen - Machine Learning Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            margin-top: 80px;
+        }
+
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-placeholder {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .experience-company {
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .experience-date {
+            color: #666;
+            font-size: 0.9rem;
+            background: #f0f0f0;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .experience-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .experience-description ul {
+            margin-left: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .experience-description li {
+            margin-bottom: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .education-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .education-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #764ba2;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .education-degree {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .education-school {
+            font-size: 1.1rem;
+            color: #764ba2;
+            font-weight: 600;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #333;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-link:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 1);
+            color: #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-link i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-placeholder {
+                width: 200px;
+                height: 200px;
+                font-size: 3rem;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .education-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+    
+    <header>
+        <nav class="container">
+            <div class="logo">Siying Chen</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Siying Chen</h1>
+                <p class="subtitle">Aspiring Machine Learning Engineer</p>
+                <p class="description">
+                    Master's student in Speech and Language Processing at the University of Edinburgh, 
+                    passionate about AI, NLP, and creating impactful solutions that bridge linguistics, 
+                    human-centered thinking, and cutting-edge technology.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i>
+                        Get In Touch
+                    </a>
+                    <a href="https://github.com/siyingchenclaire" class="btn btn-secondary" target="_blank">
+                        <i class="fab fa-github"></i>
+                        View Projects
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <div class="profile-placeholder">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="about-text">
+                        <p>
+                            I'm a Master's student in Speech and Language Processing at the University of Edinburgh, 
+                            with a strong foundation in Artificial Intelligence, Machine Learning, Natural Language 
+                            Processing, and Speech Processing.
+                        </p>
+                        <p>
+                            Currently collaborating with Dialpad on my dissertation project, where I leverage large 
+                            datasets to improve automatic speech recognition (ASR) accuracy in targeted domains. 
+                            My transition to AI and NLP in 2024 was driven by a passion for technology and a desire 
+                            to combine my background in linguistics, human-centered thinking, and design.
+                        </p>
+                        <p>
+                            I believe that fostering diversity in AI—especially greater inclusion of women and 
+                            underrepresented groups—is key to building systems that truly reflect and serve the 
+                            needs of all communities.
+                        </p>
+                        <div style="margin-top: 2rem;">
+                            <a href="#" class="btn btn-primary" onclick="alert('Please upload your resume file and update this link!')">
+                                <i class="fas fa-download"></i>
+                                Download Resume
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2>Professional Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Research Collaborator</div>
+                                <div class="experience-company">Dialpad</div>
+                            </div>
+                            <div class="experience-date">Ongoing</div>
+                        </div>
+                        <div class="experience-description">
+                            <p><strong>Research Objective:</strong> Investigating methods to combine large-scale public audio data with smaller, high-quality in-domain datasets to develop speech recognition models that surpass traditional training paradigms.</p>
+                            <ul>
+                                <li>Designing robust data preparation pipelines for large-scale public ASR datasets</li>
+                                <li>Fine-tuning pre-trained models (e.g., Whisper) on domain-specific data</li>
+                                <li>Exploring fine-tuning strategies including sequential transfer, continuous learning, and data mixing</li>
+                                <li>Systematic comparison through quantitative evaluation focusing on WER and domain-specific metrics</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Machine Learning Engineer Intern</div>
+                                <div class="experience-company">BIGO Technology</div>
+                            </div>
+                            <div class="experience-date">2024</div>
+                        </div>
+                        <div class="experience-description">
+                            <ul>
+                                <li>Developed a full-stack AI chatbot with JavaScript frontend and Python Flask backend, reducing manual research time by 80%</li>
+                                <li>Built end-to-end ETL pipeline using Scrapy and Newspaper3k to extract articles from major tech news sites</li>
+                                <li>Integrated OpenAI GPT API to generate summaries and prioritize insights aligned with strategic needs</li>
+                                <li>Containerized application using Docker, configured Nginx for secure access, and used Celery with Redis for automated tasks</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Research Project</div>
+                                <div class="experience-company">Exploring Inductive Biases in Transformer Models</div>
+                            </div>
+                            <div class="experience-date">Jan - May 2025</div>
+                        </div>
+                        <div class="experience-description">
+                            <p><strong>Submitted to ACL-SRW 2025</strong></p>
+                            <ul>
+                                <li>Explored whether GPT-2 models can learn synthetically constructed circular languages</li>
+                                <li>Developed parameterized linearization framework based on start position, stride, and direction</li>
+                                <li>Demonstrated GPT-2's sensitivity to local token proximity over global sequence order</li>
+                                <li>Contributed new evidence to debates on LLM cognition and human-comparative language processing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2>Technical Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Deep Learning</span>
+                            <span class="skill-tag">Neural Networks</span>
+                            <span class="skill-tag">Transfer Learning</span>
+                            <span class="skill-tag">Fine-tuning</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-microphone"></i>
+                        </div>
+                        <h3>Speech Processing</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ASR</span>
+                            <span class="skill-tag">Whisper</span>
+                            <span class="skill-tag">Audio Processing</span>
+                            <span class="skill-tag">Speech Recognition</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>NLP</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Transformers</span>
+                            <span class="skill-tag">GPT</span>
+                            <span class="skill-tag">Language Models</span>
+                            <span class="skill-tag">Text Generation</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Programming</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">Flask</span>
+                            <span class="skill-tag">Docker</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h3>Data Engineering</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">ETL Pipelines</span>
+                            <span class="skill-tag">Scrapy</span>
+                            <span class="skill-tag">Data Processing</span>
+                            <span class="skill-tag">Redis</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Research</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Quantitative Analysis</span>
+                            <span class="skill-tag">Statistical Methods</span>
+                            <span class="skill-tag">Research Design</span>
+                            <span class="skill-tag">Academic Writing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <div class="container">
+                <h2>Education</h2>
+                <div class="education-grid">
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <div class="education-degree">MSc in Speech and Language Processing</div>
+                                <div class="education-school">The University of Edinburgh</div>
+                            </div>
+                            <div class="experience-date">09/2024 - 08/2025</div>
+                        </div>
+                        <div class="experience-description">
+                            <p><strong>Relevant Courses:</strong> Machine Learning Practical, Accelerated Natural Language Processing, 
+                            Natural Language Understanding, Generation and Machine Translation, Speech Processing, 
+                            Automatic Speech Recognition, Quantitative Research Methods, Simulating Language</p>
+                        </div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div>
+                                <div class="education-degree">B.A. in English Studies (Language Technology Stream)</div>
+                                <div class="education-school">The Chinese University of Hong Kong, Shenzhen</div>
+                            </div>
+                            <div class="experience-date">09/2020 - 06/2024</div>
+                        </div>
+                        <div class="experience-description">
+                            <p><strong>First Class Honours</strong></p>
+                            <p><strong>Relevant Courses:</strong> Applied Machine Learning, Computer Programming for NLP, 
+                            Data Structures, Introduction to NLP, Linear Algebra, Mathematics</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2>Let's Connect</h2>
+                    <p>I'm always interested in discussing AI, machine learning, and innovative projects. 
+                    Feel free to reach out!</p>
+                    <div class="contact-links">
+                        <a href="mailto:siyingchen1006@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            siyingchen1006@gmail.com
+                        </a>
+                        <a href="https://linkedin.com/in/siying-c-2b795b262" class="contact-link" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            LinkedIn
+                        </a>
+                        <a href="https://github.com/siyingchenclaire" class="contact-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Siying Chen. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrolled = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('scrollIndicator').style.width = scrolled + '%';
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animation
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
